@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+            
+    <title>Додати нову справу</title>
+</head>
+            
+<body>
+    <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+            <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.svg') }}">
+            <h1 class="navbar-brand text-light">База юридичних справ школи права УКУ</h1>
+            <a href="/" class="btn btn-outline-light btn-md" role="button">Перейти на головну</a>
+        </div>
+    </nav>
+    <div class="container-fluid cases">
+        <form method="POST">
+            <div class="form-group">
+                <label>Прізвище, ім'я та по батькові клієнта</label>
+                <input type="text" class="form-control" name="name" placeholder="Петренко Петро Петрович">
+            </div>
+            <div class="form-group">
+                <label>Спосіб звернення</label>
+                <select class="form-control" name="ask">
+                    <option value="Особисто">Особисто</option>
+                    <option value="Електронна пошта">Електронна пошта</option>
+                    <option value="Телефон">Телефон</option>
+                    <option value="Соціальні мережі">Соціальні мережі</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">Стать</label><br>
+                
+                <input type="radio" name="sex" value="Чоловіча" checked>       Чоловіча<br>
+                <input type="radio" name="sex" value="Жіноча">       Жіноча<br>
+            </div>
+            <div class="form-group">
+                <label>Місце проживання</label>
+                <input type="text" class="form-control" name="address" placeholder="м. Львів, вул. Стрийська 1">
+            </div>
+
+            <div class="form-group">
+                <label>Соціальний статус</label>
+                <select class="form-control" name="social">
+                    <option value="Студент">Студент</option>
+                    <option value="Пенсіонер">Пенсіонер</option>
+                    <option value="Військовослужбовець">Військовослужбовець</option>
+                    <option value="Особа з інвалідністю">Особа з інвалідністю</option>
+                    <option value="Волонтер">Волонтер</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-check-label">Робота</label><br>
+            
+                <input type="radio" name="job" value="Працює" checked>       Працює<br>
+                <input type="radio" name="job" value="Не працює">       Не працює<br>
+            </div>
+        <div class="form-group">
+            <label>Суть звернення</label>
+            <textarea class="form-control" name="about" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Додати справу</button>
+        </form>          
+    </div>
+
+</body>
+</html>

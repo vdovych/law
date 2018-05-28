@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+            
+    <title>Головна</title>
+</head>
+            
+<body>
+    <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+            <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.svg') }}">
+            <h1 class="navbar-brand text-light">База юридичних справ школи права УКУ</h1>
+            <a href="add" class="btn btn-outline-light btn-md" role="button">Створити нову справу</a>
+        </div>
+    </nav>
+    <div class="container-fluid cases">
+        <table class="table">
+            {% for case in data %}
+                <tr>
+                    {% for entry in case %}
+                        <td><h5>{{ entry }}</h5></td> 
+                    {% endfor %}
+
+                    <td class="text-right">
+                        <a href="/case/{{ case[0] }}" class="btn btn-outline-dark btn-sm" role="button">Перейти до справи</a>
+                    </td>
+                </tr>
+            {% endfor %}
+                    
+    </table>
+    </div>
+</body>
+</html>
