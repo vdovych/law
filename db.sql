@@ -2,7 +2,7 @@
  GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
  FLUSH PRIVILEGES;
 
- CREATE DATABASE law;
+ CREATE DATABASE law CHARACTER SET utf8;
 
  USE law;
 
