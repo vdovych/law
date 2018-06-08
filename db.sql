@@ -7,7 +7,7 @@
  USE law;
 
  CREATE TABLE cases (
-   id INT NOT NULL AUTO_INCREMENT,
+   id      INT NOT NULL AUTO_INCREMENT,
    name    VARCHAR(255),
    ask     VARCHAR(20),
    sex     VARCHAR(10),

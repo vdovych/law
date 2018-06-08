@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-            
+    {{ dropzone.load() }}     
+    {{ dropzone.style('border: 2px dashed #0087F7; margin-top: 2%;  margin-bottom: 2%; max-height: 400px;') }}
     <title>Додати нову справу</title>
 </head>
             
@@ -18,7 +19,7 @@
         </div>
     </nav>
     <div class="container-fluid cases">
-        <form method="POST">
+        <form id="add" method="POST">
             <div class="form-group">
                 <label>Прізвище, ім'я та по батькові клієнта</label>
                 <input type="text" class="form-control" name="name" placeholder="Петренко Петро Петрович">
@@ -64,10 +65,13 @@
             </div>
         <div class="form-group">
             <label>Суть звернення</label>
-            <textarea class="form-control" name="about" rows="3"></textarea>
+            <textarea class="form-control" name="about" rows="5"></textarea>
         </div>
-        <button type="submit" class="btn btn-success btn-block">Додати справу</button>
-        </form>          
+        </form>         
+        
+        {{ dropzone.create(action_view='add') }}
+
+        <button type="submit" form="add" name="form" class="btn btn-success btn-block">Додати справу</button>
     </div>
 
 </body>

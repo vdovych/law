@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {{ dropzone.load() }}     
+    {{ dropzone.style('border: 2px dashed #0087F7; margin-top: 2%;  margin-bottom: 2%; max-height: 400px;') }}
+    <title>Змінити справу</title>
+</head>
+            
+<body>
+    <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+            <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.svg') }}">
+            <h1 class="navbar-brand text-light">База юридичних справ школи права УКУ</h1>
+            <a href="/" class="btn btn-outline-light btn-md" role="button">Перейти на головну</a>
+        </div>
+    </nav>
+    <div class="container-fluid cases">
+        <form id="edit" method="POST">
+            <div class="form-group">
+                <label>Прізвище, ім'я та по батькові клієнта</label>
+                <input type="text" class="form-control" name="name" value="{{ data[1] }}">
+            </div>
+            <div class="form-group">
+                <label>Спосіб звернення</label>
+                <select class="form-control" name="ask">
+                    <option value="Особисто" {% if data[2][0] == 'О' %} selected {% endif %}>Особисто</option>
+                    <option value="Електронна пошта"  {% if data[2][0] == 'Е' %} selected {% endif %}>
+                        Електронна пошта
+                    </option>
+                    <option value="Телефон" {% if data[2][0] == 'Т' %} selected {% endif %}>Телефон</option>
+                    <option value="Соціальні мережі" {% if data[2][0] == 'С' %} selected {% endif %}>
+                        Соціальні мережі
+                    </option>
+                    <option value="Інше" {% if data[2][0] == 'І' %} selected {% endif %}>Інше</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">Стать</label><br>
+                
+                <input type="radio" name="sex" value="Чоловіча" {% if data[3][0] == 'Ч' %} checked {% endif %}>
+                    Чоловіча
+                <br>
+                <input type="radio" name="sex" value="Жіноча" {% if data[3][0] == 'Ж' %} checked {% endif %}>       
+                    Жіноча
+                <br>
+            </div>
+            <div class="form-group">
+                <label>Місце проживання</label>
+                <input type="text" class="form-control" name="address" value="{{ data[4] }}">
+            </div>
+
+            <div class="form-group">
+                <label>Соціальний статус</label>
+                <select class="form-control" name="social">
+                    <option value="Студент" {% if data[5][0] == 'С' %} selected {% endif %}>Студент</option>
+                    <option value="Пенсіонер" {% if data[5][0] == 'П' %} selected {% endif %}>Пенсіонер</option>
+                    <option value="Військовослужбовець" {% if data[5][:2] == 'Ві' %} selected {% endif %}>
+                        Військовослужбовець
+                    </option>
+                    <option value="Особа з інвалідністю" {% if data[5][0] == 'О' %} selected {% endif %}>
+                        Особа з інвалідністю
+                    </option>
+                    <option value="Волонтер" {% if data[5][:2] == 'Во' %} selected {% endif %}>Волонтер</option>
+                    <option value="Інше" {% if data[5][0] == 'І' %} selected {% endif %}>Інше</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-check-label">Робота</label><br>
+            
+                <input type="radio" name="job" value="Працює" {% if data[6][0] == 'П' %} checked {% endif %}>
+                    Працює
+                <br>
+                <input type="radio" name="job" value="Не працює" {% if data[6][0] == 'Н' %} checked {% endif %}>
+                    Не працює
+                <br>
+            </div>
+        <div class="form-group">
+            <label>Суть звернення</label>
+            <textarea class="form-control" name="about" rows="5">{{ data[7] }}</textarea>
+        </div>
+
+        </form>
+        {{ dropzone.create(action=data[0]) }}
+
+        <button type="submit" form="edit" name="form" class="btn btn-success btn-block">Змінити справу</button>          
+    </div>
+
+</body>
+</html>
