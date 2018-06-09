@@ -22,68 +22,233 @@
         <form id="edit" method="POST">
             <div class="form-group">
                 <label>Прізвище, ім'я та по батькові клієнта</label>
-                <input type="text" class="form-control" name="name" value="{{ data[1] }}">
+                <input type="text" class="form-control" name="name" value="{{ data[i] }}">
+                {% set i = i + 1 %}
             </div>
+            
+
+            <div class="form-group">
+                <label>Прізвище, ім'я та по батькові особи, яка звертається замість клієнта</label>
+                <input type="text" class="form-control" name="name1" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+    
+            <div class="form-group">
+                <label>Дата звернення</label>
+                </br>
+                <input type="date" class="form-control" name="date" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
             <div class="form-group">
                 <label>Спосіб звернення</label>
                 <select class="form-control" name="ask">
-                    <option value="Особисто" {% if data[2][0] == 'О' %} selected {% endif %}>Особисто</option>
-                    <option value="Електронна пошта"  {% if data[2][0] == 'Е' %} selected {% endif %}>
+                    <option value="Особисто" {% if data[i][0] == 'О' %} selected {% endif %}>Особисто</option>
+                    <option value="Електронна пошта"  {% if data[4][0] == 'Е' %} selected {% endif %}>
                         Електронна пошта
                     </option>
-                    <option value="Телефон" {% if data[2][0] == 'Т' %} selected {% endif %}>Телефон</option>
-                    <option value="Соціальні мережі" {% if data[2][0] == 'С' %} selected {% endif %}>
+                    <option value="Телефон" {% if data[i][0] == 'Т' %} selected {% endif %}>Телефон</option>
+                    <option value="Соціальні мережі" {% if data[4][0] == 'С' %} selected {% endif %}>
                         Соціальні мережі
                     </option>
-                    <option value="Інше" {% if data[2][0] == 'І' %} selected {% endif %}>Інше</option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %}>Інше</option>
                 </select>
+                {% set i = i + 1 %}
             </div>
+
+            <div class="form-group">
+                <label>Дата народження</label>
+                </br>
+                <input type="date" class="form-control" name="birth" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
             <div class="form-group">
                 <label class="form-check-label">Стать</label><br>
                 
-                <input type="radio" name="sex" value="Чоловіча" {% if data[3][0] == 'Ч' %} checked {% endif %}>
+                <input type="radio" name="sex" value="Чоловіча" {% if data[i][0] == 'Ч' %} checked {% endif %}>
                     Чоловіча
                 <br>
-                <input type="radio" name="sex" value="Жіноча" {% if data[3][0] == 'Ж' %} checked {% endif %}>       
+                <input type="radio" name="sex" value="Жіноча" {% if data[i][0] == 'Ж' %} checked {% endif %}>       
                     Жіноча
                 <br>
+                {% set i = i + 1 %}
             </div>
+
             <div class="form-group">
                 <label>Місце проживання</label>
-                <input type="text" class="form-control" name="address" value="{{ data[4] }}">
+                <input type="text" class="form-control" name="address" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Контактний телефон</label>
+                <input type="tel" class="form-control" name="phone" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+    
+            <div class="form-group">
+                <label>Електронна адреса</label>
+                <input type="email" class="form-control" name="email" value="{{ data[i] }}">
+                {% set i = i + 1 %}
             </div>
 
             <div class="form-group">
                 <label>Соціальний статус</label>
                 <select class="form-control" name="social">
-                    <option value="Студент" {% if data[5][0] == 'С' %} selected {% endif %}>Студент</option>
-                    <option value="Пенсіонер" {% if data[5][0] == 'П' %} selected {% endif %}>Пенсіонер</option>
-                    <option value="Військовослужбовець" {% if data[5][:2] == 'Ві' %} selected {% endif %}>
+                    <option value="Студент" {% if data[i][0] == 'С' %} selected {% endif %}>Студент</option>
+                    <option value="Пенсіонер" {% if data[i][0] == 'П' %} selected {% endif %}>Пенсіонер</option>
+                    <option value="Військовослужбовець" {% if data[i][:2] == 'Ві' %} selected {% endif %}>
                         Військовослужбовець
                     </option>
-                    <option value="Особа з інвалідністю" {% if data[5][0] == 'О' %} selected {% endif %}>
+                    <option value="Особа з інвалідністю" {% if data[i][0] == 'О' %} selected {% endif %}>
                         Особа з інвалідністю
                     </option>
-                    <option value="Волонтер" {% if data[5][:2] == 'Во' %} selected {% endif %}>Волонтер</option>
-                    <option value="Інше" {% if data[5][0] == 'І' %} selected {% endif %}>Інше</option>
+                    <option value="Волонтер" {% if data[i][:2] == 'Во' %} selected {% endif %}>Волонтер</option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %}>Інше</option>
                 </select>
+                {% set i = i + 1 %}
             </div>
 
             <div class="form-group">
                 <label class="form-check-label">Робота</label><br>
             
-                <input type="radio" name="job" value="Працює" {% if data[6][0] == 'П' %} checked {% endif %}>
+                <input type="radio" name="job" value="Працює" {% if data[i][0] == 'П' %} checked {% endif %}>
                     Працює
                 <br>
-                <input type="radio" name="job" value="Не працює" {% if data[6][0] == 'Н' %} checked {% endif %}>
+                <input type="radio" name="job" value="Не працює" {% if data[i][0] == 'Н' %} checked {% endif %}>
                     Не працює
                 <br>
+                {% set i = i + 1 %}
             </div>
-        <div class="form-group">
-            <label>Суть звернення</label>
-            <textarea class="form-control" name="about" rows="5">{{ data[7] }}</textarea>
-        </div>
+      
+            <div class="form-group">
+                <label>Звідки дізналися</label>
+                <select class="form-control" name="media">
+                    <option value="ЗМІ" {% if data[i][0] == 'З' %} selected {% endif %}>ЗМІ</option>
+                    <option value="Державні органи" {% if data[i][0] == 'Д' %} selected {% endif %}>Державні органи</option>
+                    <option value="Соціальні мережі" {% if data[i][0] == 'С' %} selected {% endif %}>Соціальні мережі</option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %}>Інше</option>
+                </select>
+                {% set i = i + 1 %}
+            </div>
 
+            <div class="form-group">
+                <label class="form-check-label">Черговість звернення</label><br>
+            
+                <input type="radio" name="queue" value="Вперше" {% if data[i][0] == 'В' %} checked {% endif %}>       Вперше<br>
+                <input type="radio" name="queue" value="Звертався попередньо" {% if data[i][0] == 'З' %} checked {% endif %}>   
+                    Звертався попередньо
+                <br>
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Галузь права</label>
+                <select class="form-control" name="law">
+                    <option value="Сімейне право" {% if data[i][:2] == 'Сі' %} selected {% endif %}>Сімейне право</option>
+                    <option value="Трудове право" {% if data[i][0] == 'Т' %} selected {% endif %}>Трудове право</option>
+                    <option value="Господарське право" {% if data[i][0] == 'Г' %} selected {% endif %}>Господарське право</option>
+                    <option value="Договірні зобов'язання" {% if data[i][0] == 'Д' %} selected {% endif %}>
+                        Договірні зобов'язання
+                    </option>
+                    <option value="Адміністративне право" {% if data[i][0] == 'А' %} selected {% endif %}>
+                        Адміністративне право</option>
+                    <option value="Спадкове право" {% if data[i][:2] == 'Сп' %} selected {% endif %}>Спадкове право</option>
+                    <option value="Кримінальне право" {% if data[i][0] == 'К' %} selected {% endif %}>Кримінальне право</option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %}>Інше</option>
+                </select>
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Суть звернення</label>
+                <textarea class="form-control" name="about" rows="5">{{ data[i] }}</textarea>
+                {% set i = i + 1 %}
+            </div>
+
+             
+            <div class="form-group">
+                <label>Яку допомогу очікує отримати</label>
+                <select class="form-control" name="help">
+                    <option value="Консультація" {% if data[i][0] == 'К' %} selected {% endif %}>Консультація</option>
+                    <option value="Створення документів" {% if data[i][0] == 'С' %} selected {% endif %}>Створення документів</option>
+                    <option value="Надання інформації" {% if data[i][0] == 'Н' %} selected {% endif %}>Надання інформації</option>
+                    <option value="Представництво інтересів" {% if data[i][0] == 'П' %} selected {% endif %}>Представництво інтересів</option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %} >Інше</option>
+                </select>
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Консультанти</label>
+                <input type="text" class="form-control" name="student" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Дата відкриття справи</label>
+                </br>
+                <input type="date" class="form-control" name="open" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+            <div class="form-group">
+                <label>Дата закриття справи</label>
+                </br>
+                <input type="date" class="form-control" name="close" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Стадія розгляду справи</label>
+                <input type="text" class="form-control" name="stage" value="{{ data[i] }}">
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label class="form-check-label">Чи потрібне судове представництво</label><br>
+            
+                <input type="radio" name="present" value="Так" {% if data[i][0] == 'Т' %} checked {% endif %}>       Так<br>
+                <input type="radio" name="present" value="Ні" {% if data[i][0] == 'Н' %} checked {% endif %}>       Ні<br>
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Результат</label>
+                <textarea class="form-control" name="result" rows="2">{{ data[i] }}</textarea>
+                {% set i = i + 1 %}
+            </div>
+
+            <div class="form-group">
+                <label>Спосіб оскарження</label>
+                <select class="form-control" name="appeal">
+                    <option value="Адміністративний" {% if data[i][0] == 'А' %} selected {% endif %}>Адміністративний</option>
+                    <option value="Судовий" {% if data[i][0] == 'С' %} selected {% endif %}>Судовий</option>
+                    <option value="Не потребує звернень" {% if data[i][0] == 'Н' %} selected {% endif %}>
+                        Не потребує звернень
+                    </option>
+                    <option value="Інше" {% if data[i][0] == 'І' %} selected {% endif %}>Інше</option>
+                </select>
+                {% set i = i + 1 %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-check-label">Характеристика клієнта</label><br>
+            
+                <input type="radio" name="client" value="Раціональний"  {% if data[i][0] == 'Р' %} checked {% endif %}>       Раціональний<br>
+                <input type="radio" name="client" value="Ірраціональний" {% if data[i][0] == 'І' %} checked {% endif %}>       Ірраціональний<br>
+                {% set i = i + 1 %}
+            </div>
+            <div class="form-group">
+                <label>Додаткова інформація</label>
+                <textarea class="form-control" name="info" rows="2">{{ data[i] }}</textarea>
+                {% set i = i + 1 %}
+            </div>
+            <div class="form-group">
+                <label>Комментарі до справи</label>
+                <textarea class="form-control" name="comment" rows="5">{{ data[i] }}</textarea>
+                {% set i = i + 1 %}
+            </div>
         </form>
         {{ dropzone.create(action=data[0]) }}
 

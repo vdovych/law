@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, send_from_directory
 from flaskext.mysql import MySQL
 from flask_dropzone import Dropzone
+from datetime import datetime
+import locale
 import os
 
 app = Flask(__name__)
@@ -19,19 +21,31 @@ app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
 app.config['DROPZONE_MAX_FILE_SIZE'] = 100
 app.config['DROPZONE_DEFAULT_MESSAGE'] = "Щоб додати документи, натисніть або перетягніть файли"
 
+locale.setlocale(locale.LC_ALL, 'uk_UA.utf8')
+
 def sql_connection():    
     connection = sql.get_db()
     cursor = connection.cursor()
     return connection, cursor
 
 def form():
-    fields = ['name', 'ask', 'sex', 'address', 'social', 'job', 'about']
+    fields = [
+        'name', 'name1', 'date', 'ask', 'birth', 'sex', 
+        'address', 'phone', 'email', 'social', 'job', 
+        'media', 'queue', 'law', 'about', 'help', 'student', 
+        'open', 'close', 'stage', 'present', 'result', 'appeal', 
+        'client', 'info', 'comment'
+    ]
+
     requests = ()
 
     for field in fields:
         requests += (request.form[field], )
 
     return requests, fields
+
+def change_date(date):
+    return datetime.strptime(str(date), '%Y-%m-%d').strftime('%d %B %Y')
 
 @app.route('/')
 def main():
@@ -47,12 +61,18 @@ def case(id):
     connection, cursor = sql_connection()
 
     cursor.execute('SELECT * from cases WHERE id=%s', (id))
-    data = cursor.fetchall()[0]
+    data = list(cursor.fetchall()[0])
     fields =  [
-        'Номер звернення', 'Прізвище, ім\'я та по батькові', 'Спосіб звернення', 
-        'Стать', 'Місце проживання', 'Соціальний статус', 'Робота', 'Суть звернення'
+        'Номер звернення', 'ПІП клієнта', 'ПІП особи яка звертається', 'Дата звернення', 'Спосіб звернення', 
+        'Дата народження', 'Стать', 'Телефон', 'Електронна адреса', 'Місце проживання', 'Соціальний статус', 
+        'Робота', 'Звідки дізналися', 'Черговість звернення', 'Галузь права', 'Суть звернення', 'Допомога', 
+        'Консультанти', 'Дата відкриття справи', 'Дата закриття справи', 'Стадія розгляду справи', 'Cудове представництво', 
+        'Результат', 'Спосіб оскарження', 'Характеристика клієнта', 'Додаткова інформація', 'Комментарі'
     ]
-   
+
+    data[fields.index('Дата народження')] = change_date(data[fields.index('Дата народження')])
+    data[fields.index('Дата звернення')] = change_date(data[fields.index('Дата звернення')])
+
     files = [file for file in os.listdir('uploads') if file.split('_', 1)[0] == str(id)]
   
     return render_template('case.html', data=data, fields=fields, files=files)
@@ -82,7 +102,7 @@ def edit(id):
     cursor.execute('SELECT * from cases WHERE id=%s', (id))
     data = cursor.fetchall()[0]
    
-    return render_template('edit.html', data=data)
+    return render_template('edit.html', data=data, i=1)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -90,8 +110,12 @@ def add():
         connection, cursor = sql_connection()
         cursor.execute('SELECT max(id) from cases')
 
-        id = cursor.fetchall()[0][0] + 1
-    
+        id = cursor.fetchall()[0][0]
+        if id is not None:
+            id += 1
+        else:
+            id = 1
+
         if 'form' in request.form:
             requests, fields = form()
            
@@ -106,7 +130,7 @@ def add():
 
         return redirect('/')
 
-    return render_template('add.html')
+    return render_template('add.html', now=datetime.now().strftime('%Y-%m-%d'))
 
 @app.route('/remove-file/<path>')
 def remove_file(path):

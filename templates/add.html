@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ua">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,8 +22,20 @@
         <form id="add" method="POST">
             <div class="form-group">
                 <label>Прізвище, ім'я та по батькові клієнта</label>
-                <input type="text" class="form-control" name="name" placeholder="Петренко Петро Петрович">
+                <input type="text" class="form-control" name="name">
             </div>
+
+            <div class="form-group">
+                <label>Прізвище, ім'я та по батькові особи, яка звертається замість клієнта</label>
+                <input type="text" class="form-control" name="name1">
+            </div>
+
+            <div class="form-group">
+                <label>Дата звернення</label>
+                </br>
+                <input type="date" class="form-control" name="date" value="{{ now }}">
+            </div>
+          
             <div class="form-group">
                 <label>Спосіб звернення</label>
                 <select class="form-control" name="ask">
@@ -35,6 +47,11 @@
                 </select>
             </div>
             <div class="form-group">
+                <label>Дата народження</label>
+                </br>
+                <input type="date" class="form-control" name="birth" value="{{ now }}">
+            </div>
+            <div class="form-group">
                 <label class="form-check-label">Стать</label><br>
                 
                 <input type="radio" name="sex" value="Чоловіча" checked>       Чоловіча<br>
@@ -42,7 +59,17 @@
             </div>
             <div class="form-group">
                 <label>Місце проживання</label>
-                <input type="text" class="form-control" name="address" placeholder="м. Львів, вул. Стрийська 1">
+                <input type="text" class="form-control" name="address">
+            </div>
+
+            <div class="form-group">
+                <label>Контактний телефон</label>
+                <input type="tel" class="form-control" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label>Електронна адреса</label>
+                <input type="email" class="form-control" name="email">
             </div>
 
             <div class="form-group">
@@ -63,10 +90,112 @@
                 <input type="radio" name="job" value="Працює" checked>       Працює<br>
                 <input type="radio" name="job" value="Не працює">       Не працює<br>
             </div>
-        <div class="form-group">
-            <label>Суть звернення</label>
-            <textarea class="form-control" name="about" rows="5"></textarea>
-        </div>
+
+            <div class="form-group">
+                <label>Звідки дізналися</label>
+                <select class="form-control" name="media">
+                    <option value="ЗМІ">ЗМІ</option>
+                    <option value="Державні органи">Державні органи</option>
+                    <option value="Соціальні мережі">Соціальні мережі</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-check-label">Черговість звернення</label><br>
+            
+                <input type="radio" name="queue" value="Вперше" checked>       Вперше<br>
+                <input type="radio" name="queue" value="Звертався попередньо">       Звертався попередньо<br>
+            </div>
+
+            <div class="form-group">
+                <label>Галузь права</label>
+                <select class="form-control" name="law">
+                    <option value="Сімейне право">Сімейне право</option>
+                    <option value="Трудове право">Трудове право</option>
+                    <option value="Господарське право">Господарське право</option>
+                    <option value="Договірні зобов'язання">Договірні зобов'язання</option>
+                    <option value="Адміністративне право">Адміністративне право</option>
+                    <option value="Спадкове право">Спадкове право</option>
+                    <option value="Кримінальне право">Кримінальне право</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Суть звернення</label>
+                <textarea class="form-control" name="about" rows="5"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Яку допомогу очікує отримати</label>
+                <select class="form-control" name="help">
+                    <option value="Консультація">Консультація</option>
+                    <option value="Створення документів">Створення документів</option>
+                    <option value="Надання інформації">Надання інформації</option>
+                    <option value="Представництво інтересів">Представництво інтересів</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Консультанти</label>
+                <input type="text" class="form-control" name="student">
+            </div>
+
+            <div class="form-group">
+                <label>Дата відкриття справи</label>
+                </br>
+                <input type="date" class="form-control" name="open" value="{{ now }}">
+            </div>
+            <div class="form-group">
+                <label>Дата закриття справи</label>
+                </br>
+                <input type="date" class="form-control" name="close" value="{{ now }}">
+            </div>
+
+            <div class="form-group">
+                <label>Стадія розгляду справи</label>
+                <input type="text" class="form-control" name="stage">
+            </div>
+
+            <div class="form-group">
+                <label class="form-check-label">Чи потрібне судове представництво</label><br>
+            
+                <input type="radio" name="present" value="Так" checked>       Так<br>
+                <input type="radio" name="present" value="Ні">       Ні<br>
+            </div>
+
+            <div class="form-group">
+                <label>Результат</label>
+                <textarea class="form-control" name="result" rows="2"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Спосіб оскарження</label>
+                <select class="form-control" name="appeal">
+                    <option value="Адміністративний">Адміністративний</option>
+                    <option value="Судовий">Судовий</option>
+                    <option value="Не потребує звернень">Не потребує звернень</option>
+                    <option value="Інше">Інше</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-check-label">Характеристика клієнта</label><br>
+            
+                <input type="radio" name="client" value="Раціональний" checked>       Раціональний<br>
+                <input type="radio" name="client" value="Ірраціональний">       Ірраціональний<br>
+            </div>
+            <div class="form-group">
+                <label>Додаткова інформація</label>
+                <textarea class="form-control" name="info" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Комментарі до справи</label>
+                <textarea class="form-control" name="comment" rows="5"></textarea>
+            </div>
+            
         </form>         
         
         {{ dropzone.create(action_view='add') }}
