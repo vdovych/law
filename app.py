@@ -47,11 +47,15 @@ def form():
 def change_date(date):
     return datetime.strptime(str(date), '%Y-%m-%d').strftime('%d %B %Y')
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def main():
     connection, cursor = sql_connection()
-
-    cursor.execute('SELECT id, name from cases')
+    if(request.args.__contains__('name')):
+        name=request.args['name']
+    else:
+        name=""
+    #cursor.execute('SELECT id, name from cases')
+    cursor.execute("SELECT id, name from cases where name like %s", ('%'+name+'%'))
     data = cursor.fetchall()
    
     return render_template('index.html', data=data)

@@ -19,6 +19,17 @@
         </div>
     </nav>
     <div class="container-fluid cases">
+        <form>
+            <input type="text" placeholder="Введіть ім'я клієнта" name="name">
+            <input type="submit" value="Знайти" >
+        </form>
+        <form>
+            <input type="submit" value="Очистити пошук">
+        </form>
+
+
+    </div>
+    <div class="container-fluid cases">
         <table class="table">
             {% for case in data %}
                 <tr>

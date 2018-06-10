@@ -7,11 +7,11 @@
  USE law;
 
  CREATE TABLE cases (
-   id      INT NOT NULL AUTO_INCREMENT,
-   name    VARCHAR(255),
+   id      INT NOT NULL UNIQUE AUTO_INCREMENT,
+   name    VARCHAR(255) NOT NULL,
    name1   VARCHAR(255),
-   date    DATE,
-   ask     VARCHAR(20),
+   date    DATE NOT NULL,
+   ask     VARCHAR(20) NOT NULL,
    birth   DATE,
    sex     VARCHAR(10),
    address VARCHAR(255),

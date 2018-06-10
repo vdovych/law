@@ -18,7 +18,13 @@
             <a href="/" class="btn btn-outline-light btn-md" role="button">Перейти на головну</a>
         </div>
     </nav>
+    <a href="/edit/{{ data[0] }}" class="btn btn-outline-info" role="button">Змінити справу</a>
+
+        <a href="/remove/{{ data[0] }}" class="btn btn-outline-danger" role="button"
+        onclick="return confirm('Ви точно хочете видалити цю справу?');">Видалити справу</a>
+
     <div class="container-fluid cases">
+
         <table class="table table-striped table-nonfluid">
             {% for i in range(data|length) %}
                 {% if data[i]|string|length != 0 %}
@@ -47,10 +53,7 @@
             {% endfor %} 
                  
         </table>
-        <a href="/edit/{{ data[0] }}" class="btn btn-outline-info" role="button">Змінити справу</a>
-      
-        <a style="float: right;" href="/remove/{{ data[0] }}" class="btn btn-outline-danger" role="button"
-        onclick="return confirm('Ви точно хочете видалити цю справу?');">Видалити справу</a>
+
   
     </div>
 
