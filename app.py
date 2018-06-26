@@ -4,6 +4,10 @@ from flask_dropzone import Dropzone
 from datetime import datetime
 import locale
 import os
+import sys
+
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__)
 
@@ -37,7 +41,7 @@ def form():
         'client', 'info', 'comment'
     ]
 
-    requests = ()
+    requests = []
 
     for field in fields:
         requests += (request.form[field], )
@@ -55,7 +59,7 @@ def main():
     else:
         name=""
     #cursor.execute('SELECT id, name from cases')
-    cursor.execute("SELECT id, name from cases where name like %s", ('%'+name+'%'))
+    cursor.execute("SELECT id, name from cases where name like %s", ('%'+name.strip()+'%'))
     data = cursor.fetchall()
    
     return render_template('index.html', data=data)
@@ -122,9 +126,9 @@ def add():
 
         if 'form' in request.form:
             requests, fields = form()
-           
             query = 'INSERT INTO cases(' + ', '.join(fields) + ') VALUES(' + ', '.join('%s' for i in range(len(fields))) + ')'
-    
+            if(requests[0]==''):
+                requests[0]='Default name'+str(id)
             cursor.execute(query, requests)
             connection.commit()
         else:
