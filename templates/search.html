@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Пошук за параметрами</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-custom">
+        <div class="container-fluid">
+            <a href="/">
+                <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.svg') }}">
+            </a>
+            <h1 class="navbar-brand text-light">База юридичних справ школи права УКУ</h1>
+            <a href="/" class="btn btn-outline-light btn-md" role="button">Перейти на головну</a>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-sm cases">
+            <button type="submit" form="search" name="form" class="btn btn-success">Знайти</button>
+            <form id="search" method="post">
+                <div class="form-group">
+                    <label>Спосіб звернення</label>
+                    <select class="form-control" name="ask">
+                        <option value="">Неважливо</option>
+                        <option value="Особисто">Особисто</option>
+                        <option value="Електронна пошта">Електронна пошта</option>
+                        <option value="Телефон">Телефон</option>
+                        <option value="Соціальні мережі">Соціальні мережі</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label">Стать</label><br>
+                    <input type="radio" name="sex" value="" checked>       Неважливо<br>
+                    <input type="radio" name="sex" value="Чоловіча">       Чоловіча<br>
+                    <input type="radio" name="sex" value="Жіноча">       Жіноча<br>
+                </div>
+
+                <div class="form-group">
+                    <label>Соціальний статус</label>
+                    <select class="form-control" name="social">
+                        <option value="">Неважливо</option>
+                        <option value="Студент">Студент</option>
+                        <option value="Пенсіонер">Пенсіонер</option>
+                        <option value="Військовослужбовець">Військовослужбовець</option>
+                        <option value="Особа з інвалідністю">Особа з інвалідністю</option>
+                        <option value="Волонтер">Волонтер</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label">Робота</label><br>
+                    <input type="radio" name="job" value="" checked>       Неважливо<br>
+                    <input type="radio" name="job" value="Працює">       Працює<br>
+                    <input type="radio" name="job" value="Не працює">       Не працює<br>
+                </div>
+
+                <div class="form-group">
+                    <label>Звідки дізналися</label>
+                    <select class="form-control" name="media">
+                        <option value="">Неважливо</option>
+                        <option value="ЗМІ">ЗМІ</option>
+                        <option value="Державні органи">Державні органи</option>
+                        <option value="Соціальні мережі">Соціальні мережі</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label">Черговість звернення</label><br>
+                    <input type="radio" name="queue" value="" checked>       Неважливо<br>
+                    <input type="radio" name="queue" value="Вперше">       Вперше<br>
+                    <input type="radio" name="queue" value="Звертався попередньо">       Звертався попередньо<br>
+                </div>
+
+                <div class="form-group">
+                    <label>Галузь права</label>
+                    <select class="form-control" name="law">
+                        <option value="">Неважливо</option>
+                        <option value="Сімейне право">Сімейне право</option>
+                        <option value="Трудове право">Трудове право</option>
+                        <option value="Господарське право">Господарське право</option>
+                        <option value="Договірні зобов'язання">Договірні зобов'язання</option>
+                        <option value="Адміністративне право">Адміністративне право</option>
+                        <option value="Спадкове право">Спадкове право</option>
+                        <option value="Кримінальне право">Кримінальне право</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Яку допомогу очікує отримати</label>
+                    <select class="form-control" name="help">
+                        <option value="">Неважливо</option>
+                        <option value="Консультація">Консультація</option>
+                        <option value="Створення документів">Створення документів</option>
+                        <option value="Надання інформації">Надання інформації</option>
+                        <option value="Представництво інтересів">Представництво інтересів</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label">Чи потрібне судове представництво</label><br>
+                    <input type="radio" name="present" value="" checked>       Неважливо<br>
+                    <input type="radio" name="present" value="Так">       Так<br>
+                    <input type="radio" name="present" value="Ні">       Ні<br>
+                </div>
+
+                <div class="form-group">
+                    <label>Спосіб оскарження</label>
+                    <select class="form-control" name="appeal">
+                        <option value="">Неважливо</option>
+                        <option value="Адміністративний">Адміністративний</option>
+                        <option value="Судовий">Судовий</option>
+                        <option value="Не потребує звернень">Не потребує звернень</option>
+                        <option value="Інше">Інше</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-check-label">Характеристика клієнта</label><br>
+                    <input type="radio" name="client" value="" checked>       Неважливо<br>
+                    <input type="radio" name="client" value="Раціональний">       Раціональний<br>
+                    <input type="radio" name="client" value="Ірраціональний">       Ірраціональний<br>
+                </div>
+
+            </form>
+
+
+        </div>
+        <div class="col-8 cases">
+            <label>Cases</label>
+            <table class="table">
+                {% for case in data %}
+                    <tr>
+                        {% for entry in case %}
+                            <td><h5>{{ entry }}</h5></td>
+                        {% endfor %}
+
+                        <td class="text-right">
+                            <a href="/case/{{ case[0] }}" class="btn btn-outline-dark btn-sm" role="button">Перейти до справи</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</body>
+</html>

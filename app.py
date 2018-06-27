@@ -48,6 +48,18 @@ def form():
 
     return requests, fields
 
+def form_search():
+    fields = [
+        'ask', 'sex', 'social', 'job', 'media',
+        'queue', 'law', 'present', 'appeal', 'client'
+    ]
+
+    requests = []
+
+    for field in fields:
+        requests += (request.form[field]+"%",)
+
+    return requests, fields
 def change_date(date):
     return datetime.strptime(str(date), '%Y-%m-%d').strftime('%d %B %Y')
 
@@ -64,6 +76,16 @@ def main():
    
     return render_template('index.html', data=data)
 
+@app.route('/search', methods=['GET','POST'])
+def search():
+    connection, cursor = sql_connection()
+    data=[]
+    if(request.method=='POST'):
+        requests, fields = form_search()
+        print("SELECT id, name from cases where " + "AND ".join(list(map(lambda x: str(x) + " like %s ", fields))))
+        cursor.execute("SELECT id, name from cases where "+"AND ".join(list(map(lambda x:str(x)+" like %s ",fields))),requests)
+        data=cursor.fetchall()
+    return render_template('search.html', data=data)
 @app.route('/case/<id>')
 def case(id):
     connection, cursor = sql_connection()

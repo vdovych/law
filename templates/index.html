@@ -15,10 +15,13 @@
         <div class="container-fluid">
             <img class="navbar-brand" src="{{ url_for('static', filename='img/logo.svg') }}">
             <h1 class="navbar-brand text-light">База юридичних справ школи права УКУ</h1>
-            <a href="add" class="btn btn-outline-light btn-md" role="button">Створити нову справу</a>
+            <div>
+                <a href="search" class="btn btn-outline-light btn-md" role="button">Фільр</a>
+                <a href="add" class="btn btn-outline-light btn-md" role="button">Створити нову справу</a>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid cases">
+    <div>
         <form>
             <input type="text" placeholder="Введіть ім'я клієнта" name="name">
             <input type="submit" value="Знайти" >
